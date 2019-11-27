@@ -1,17 +1,18 @@
 <title>Hypothesis 2</title>
 <center><h1>Streams Loops vs HERE flow api </h1></center>
-
 <head>
   <!-- Plotly.js -->
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
 
 <body>
-  
+
+     
   <div id="myDiv"><!-- Plotly chart will be drawn inside this DIV --></div>
+  <div id="myDiv2"><!-- Plotly chart will be drawn inside this DIV --></div>
   <script>
 
-
+// makeplot function, taking 3 different timeseries and combines.
 function makeplot() {
     Plotly.d3.csv("livelinks_streams_8484273.csv", function (err, data) {
         function unpack(data, key) {
@@ -83,7 +84,7 @@ function makeplot() {
 };
 
     var AllData =[trace1[0], trace2[0], trace3[0]];			
-    Plotly.newPlot('myDiv', AllData, layout, {displayModeBar: false});
+    Plotly.newPlot('myDiv', AllData, layout);
 
 
 }); 
@@ -101,9 +102,45 @@ makeplot();
 <br /> - To ensure motorist and public safety, please follow all traffic and project related signage.
 <br /> Duration 11 Aug 2019 to 31 Dec 2021</p>
 
-<center><img src="Roadworks2.png" alt="Simply Easy Learning" width="60%" height="35%" ></center>
+<script>
+    
+var data = [{
+  type:'scattermapbox',
+  lat:['-27.555910'],
+  lon:['152.940246'],
+  mode:'markers',
+  marker: {
+    size:14
+  },
+  text:['Centenary Highway - Darra']
+}]
 
 
+
+
+var layout = {
+  autosize: true,
+  hovermode:'closest',
+  mapbox: {
+    bearing:0,
+    center: {
+      lat:-27.49991,   //location Centenary Highway - Darra
+      lon:152.94024
+    },
+    style:'dark',
+    pitch:0,
+    zoom:10
+  },
+}
+
+Plotly.setPlotConfig({
+  mapboxAccessToken: 'pk.eyJ1IjoiZXRwaW5hcmQiLCJhIjoiY2luMHIzdHE0MGFxNXVubTRxczZ2YmUxaCJ9.hwWZful0U2CQxit4ItNsiQ'
+})
+
+Plotly.plot('myDiv2', data, layout)
+
+
+</script>
 </body>
 
 
